@@ -28,25 +28,25 @@ const parsing = async () =>{
 
         elementList.each((i,elem)=>{
             //추천
-            console.log('1번 td',$(elem).find('td:nth-child(1)').text());
+            console.log('1번 td',$(elem).find('td:nth-child(1)').text().trim());
             //공모일정
-            console.log('3번td',$(elem).find('td:nth-child(3)').text())
-            // 종목명
-            console.log('5번td',$(elem).find('td:nth-child(5)').text())
+            console.log('3번td',$(elem).find('td:nth-child(3)').text().trim());
+            // 종목명;
+            console.log('5번td',$(elem).find('td:nth-child(5)').text().trim());
             // 희망공모가
-            console.log('7번td',$(elem).find('td:nth-child(7)').text())
+            console.log('7번td',$(elem).find('td:nth-child(7)').text().trim());
             // 공모가
-            console.log('9번td',$(elem).find('td:nth-child(9)').text())
+            console.log('9번td',$(elem).find('td:nth-child(9)').text().trim());
             // 공모금액
-            console.log('11번td',$(elem).find('td:nth-child(11)').text())
+            console.log('11번td',$(elem).find('td:nth-child(11)').text().trim());
             // 환불일
-            console.log('13번td',$(elem).find('td:nth-child(13)').text())
+            console.log('13번td',$(elem).find('td:nth-child(13)').text().trim());
             // 상장일
-            console.log('15번td',$(elem).find('td:nth-child(15)').text())
+            console.log('15번td',$(elem).find('td:nth-child(15)').text().trim());
             // 경쟁률
-            console.log('17번td',$(elem).find('td:nth-child(17)').text())
+            console.log('17번td',$(elem).find('td:nth-child(17)').text().trim());
             // 주간사
-            console.log('19번td',$(elem).find('td:nth-child(19)').text())
+            console.log('19번td',$(elem).find('td:nth-child(19)').text().trim());
 
         });        
     }
@@ -79,8 +79,10 @@ const parsing = async () =>{
 
             //공모일정
             const 공모일정 = $(elem).css('height','30').find('td:nth-child(2)').text().trim();
+           
             // 종목명
             const 종목명 = $(elem).css('height','30').find('td:nth-child(3)').text().trim();
+            
             // 희망공모가
             const 희망공모가 = $(elem).css('height','30px').find('td:nth-child(4)').text().trim();
 
@@ -108,7 +110,6 @@ const parsing = async () =>{
 
             list.push(makeObj(추천,공모일정,종목명,희망공모가,공모가,공모금액,환불일,상장일,경쟁률,주간사));
         });
-
 
         list.forEach((row)=>{
             
