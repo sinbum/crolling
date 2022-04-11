@@ -1,23 +1,22 @@
 const {parsing} = require('./src/CrollIpo');
-const {writeJson} = require('./src/FileManager');
+const {writeJson,readJson,updateJson} = require('./src/FileManager');
 
 
 const directory = "database/ipo"
 const fileName = "4월"
 
 
-
+//이쪽에서 순서때문에 막힘.
 parsing()
-.then((list)=>{ 
-    
-    JSON.stringify(list);
-    writeJson(directory,fileName,JSON.stringify(list))
-    
-    list.forEach((row)=>{
-        console.log(row);
-        //writeJson(directory,fileName,row)
+    .then((WebDatalist)=>{     
+        //JSON.stringify(WebDatalist);
+        //writeJson(directory,fileName,JSON.stringify(list))    
+        const localDataList = readJson(directory,fileName);
+        return localDataList;
+        //updateJson(directory,fileName,localDataList,JSON.stringify(WebDatalist));
+        
     })
-    return;
-})
-.catch(e=>{return console.log("에러발생",e)})
-
+    .then(localDataList=>{
+        console.log('lcoalDataList',localDataList);        
+    })
+    .catch(e=>{return console.log("에러발생",e)})

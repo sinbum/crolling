@@ -66,17 +66,36 @@ module.exports.parsing = async () =>{
             
             function makeObj(id,추천,공모일정,종목명,희망공모가,공모가,공모금액,환불일,상장일,경쟁률,주간사) {
                 const obj = {};
-                obj.id = id;
+                obj.id = id;                
                 obj.recommend = 추천;
+                obj.recommend.desc = "추천";
+
                 obj.applyDate = 공모일정;
+                obj.applyDate.desc = "공모일정";
+
                 obj.name = 종목명;
-                obj.mostPrice = 희망공모가;
+                obj.name.desc = "종목명";
+
+                obj.mostPrice = 희망공모가; 
+                obj.mostPrice.desc = "희망공모가";
+
                 obj.price = 공모가;
+                obj.price.desc = "공모가";
+
                 obj.priceAllTogether = 공모금액;
+                obj.priceAllTogether.desc = "공모금액";
+
                 obj.refundDate = 환불일;
+                obj.refundDate.desc = "환불일";
+
                 obj.openDate = 상장일;
+                obj.openDate.desc = "상장일"; 
+
                 obj.coRate = 경쟁률;
+                obj.coRate.desc = "경쟁률";
+                
                 obj.companyName = 주간사;
+                obj.companyName.desc = "주간사";
 
                 return obj
             }
