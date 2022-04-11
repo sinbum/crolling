@@ -1,8 +1,3 @@
-// const { printOut } = require("./FileManager");
-
-
-
-// printOut
 
 const axios = require("axios");
 const cheerio = require("cheerio");
@@ -16,7 +11,7 @@ const getHTML = async() => {
     }
 }
 
-const parsing = async () =>{
+module.exports.parsing = async () =>{
     const html = await getHTML();
     const $ = cheerio.load(html.data);     
     let ipoList = [];
@@ -58,7 +53,7 @@ const parsing = async () =>{
             console.log('19번td',$(elem).find('td:nth-child(19)').text().trim());
 
         });  
-        
+
         console.log(obj);
     }
 
@@ -72,16 +67,16 @@ const parsing = async () =>{
             function makeObj(id,추천,공모일정,종목명,희망공모가,공모가,공모금액,환불일,상장일,경쟁률,주간사) {
                 const obj = {};
                 obj.id = id;
-                obj.추천 = 추천;
-                obj.공모일정 = 공모일정;
-                obj.종목명 = 종목명;
-                obj.희망공모가 = 희망공모가;
-                obj.공모가 = 공모가;
-                obj.공모금액 = 공모금액;
-                obj.환불일 = 환불일;
-                obj.상장일 = 상장일;
-                obj.경쟁률 = 경쟁률;
-                obj.주간사 = 주간사;
+                obj.recommend = 추천;
+                obj.applyDate = 공모일정;
+                obj.name = 종목명;
+                obj.mostPrice = 희망공모가;
+                obj.price = 공모가;
+                obj.priceAllTogether = 공모금액;
+                obj.refundDate = 환불일;
+                obj.openDate = 상장일;
+                obj.coRate = 경쟁률;
+                obj.companyName = 주간사;
 
                 return obj
             }
@@ -127,7 +122,7 @@ const parsing = async () =>{
         });
 
         tempList.forEach((row)=>{            
-            if(row.종목명.length !== 0){
+            if(row.name.length !== 0){
                 result.push(row)                
             }
         });
@@ -135,28 +130,10 @@ const parsing = async () =>{
     }  
     
     ipoList = getData(dataDir);
-    
-    
+
     return ipoList;   
     
     
     
 }
 
-
-// module.exports.getIpoList = ()=>{
-// parsing()
-// .then((list)=>{return list})
-// .catch(e=>{return console.log("에러발생",e)})
-// }
-   
-// export {parsing};
-
-
-
-    
-
-
-
-
-//}
