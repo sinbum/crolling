@@ -1,5 +1,11 @@
+// const { printOut } = require("./FileManager");
+
+
+
+// printOut
+
 const axios = require("axios");
-const cheerio = require("cheerio")
+const cheerio = require("cheerio");
 const url = "http://www.ipostock.co.kr/sub03/ipo04.asp";   
 
 const getHTML = async() => {  
@@ -12,11 +18,11 @@ const getHTML = async() => {
 
 const parsing = async () =>{
     const html = await getHTML();
-    const $ = cheerio.load(html.data);        
-    //const $ipoList = $('body table tbody tr td table tbody tr td div#print table tbody tr td table tbody tr td table tbody tr');
+    const $ = cheerio.load(html.data);     
+    let ipoList = [];
     
     //공모 테이블 부분
-    const ipoList = $('#print > table > tbody > tr:nth-child(4)');
+    //const ipoListDir = $('#print > table > tbody > tr:nth-child(4)');
 
     //컬럼
     const columnDir = $('#print > table > tbody > tr:nth-child(4) td table tbody tr:nth-child(2) td table tbody tr');
@@ -25,14 +31,17 @@ const parsing = async () =>{
     const dataDir = $('#print > table > tbody > tr:nth-child(4) td table tbody tr:nth-child(4) td table tbody tr');
    
     function getColumn(elementList) {
-
+        const obj={};
         elementList.each((i,elem)=>{
             //추천
+            obj[$(elem).find('td:nth-child(1)').text().trim()]=
             console.log('1번 td',$(elem).find('td:nth-child(1)').text().trim());
             //공모일정
             console.log('3번td',$(elem).find('td:nth-child(3)').text().trim());
+            obj[$(elem).find('td:nth-child(3)').text().trim()]
             // 종목명;
             console.log('5번td',$(elem).find('td:nth-child(5)').text().trim());
+            obj[$(elem).find('td:nth-child(5)').text().trim()]
             // 희망공모가
             console.log('7번td',$(elem).find('td:nth-child(7)').text().trim());
             // 공모가
@@ -48,18 +57,21 @@ const parsing = async () =>{
             // 주간사
             console.log('19번td',$(elem).find('td:nth-child(19)').text().trim());
 
-        });        
+        });  
+        
+        console.log(obj);
     }
 
 
     function getData(elementList) {
-        const list = [];
+        const tempList = [];
+        const result = [];
         
         elementList.each((i,elem)=>{            
             
-            function makeObj(추천,공모일정,종목명,희망공모가,공모가,공모금액,환불일,상장일,경쟁률,주간사) {
+            function makeObj(id,추천,공모일정,종목명,희망공모가,공모가,공모금액,환불일,상장일,경쟁률,주간사) {
                 const obj = {};
-
+                obj.id = id;
                 obj.추천 = 추천;
                 obj.공모일정 = 공모일정;
                 obj.종목명 = 종목명;
@@ -73,6 +85,8 @@ const parsing = async () =>{
 
                 return obj
             }
+
+            const id = i;
             
             //추천
             const 추천 = $(elem).css('height','30').find('td:nth-child(1)').text().trim();
@@ -104,26 +118,45 @@ const parsing = async () =>{
             // 주간사
             const 주간사 = $(elem).css('height','30px').find('td:nth-child(10)').text().trim();
 
+
             if(종목명.length === 0 ){
                 return;
             }
 
-            list.push(makeObj(추천,공모일정,종목명,희망공모가,공모가,공모금액,환불일,상장일,경쟁률,주간사));
+            tempList.push(makeObj(i,추천,공모일정,종목명,희망공모가,공모가,공모금액,환불일,상장일,경쟁률,주간사));
         });
 
-        list.forEach((row)=>{
-            
+        tempList.forEach((row)=>{            
             if(row.종목명.length !== 0){
-                console.log(row);
+                result.push(row)                
             }
         });
-
-        return list;
-    }
-
-    getData(dataDir)
-
+        return result;
+    }  
+    
+    ipoList = getData(dataDir);
+    
+    
+    return ipoList;   
+    
+    
+    
 }
 
-parsing()
 
+// module.exports.getIpoList = ()=>{
+// parsing()
+// .then((list)=>{return list})
+// .catch(e=>{return console.log("에러발생",e)})
+// }
+   
+// export {parsing};
+
+
+
+    
+
+
+
+
+//}
