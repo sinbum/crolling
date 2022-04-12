@@ -13,9 +13,9 @@ parsing()
         //console.log(WebDatalist); // 제이슨 포멧으로 돌려주는가?
         //writeJson(directory,fileName,WebDatalist)    
         
-        readJson(directory,fileName);
+        //readJson(directory,fileName);
             //console.log('lcoalDataList',WebDatalist);        
-            //updateJson(directory,fileName,WebDatalist);
+        updateJson(directory,fileName,WebDatalist);
 
         return 
         

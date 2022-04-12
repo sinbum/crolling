@@ -43,8 +43,6 @@ const makeJsonToFile = (directory, fileName, jsonList) => {
         console.log("데이터정보 입력 필요");
     }
 
-
-
     filePath = directory + "/" + fileName + ".json";
 
     //디렉토리가 없으면 디렉토리 생성
@@ -61,9 +59,8 @@ const makeJsonToFile = (directory, fileName, jsonList) => {
 
 //인자로 받은 객체 정보 와 저장되어있는 데이터 비교하기.
 const localUpdate = async (directory, fileName, webDataList) => {
-    // 동적데이터 >>> 희망공모가,공모금액,상장일,경쟁률
-    isChanged = false;
-    changedList = [];
+    let isChanged = false;
+    let changedList = [];
 
     let localDataList = await getJsonFromFile(directory, fileName);
     
@@ -91,19 +88,27 @@ const localUpdate = async (directory, fileName, webDataList) => {
             isChanged = true;
             changedList = localDataList;
 
-            console.log('변경된 리스트 길이',changedList.length);
-            console.log('변경된 리스트 내역',changedList);
+            //console.log('변경된 리스트 길이',changedList.length);
         }
     }
-
-    return;
+    
+    //console.log('변경된 리스트 내역',changedList);
+    
 
     //console.log(JSON.parse(webDataList));
 
+    
+    //웹데이터와 변경된 데이터내용중 세부데이터 비교 후 수정
+    // 동적데이터 >>> 공모가,공모금액,상장일,경쟁률
     webDataList.forEach((row,idx) => {
-        if (changedList[idx].mostPrice != row.mostPrice) {
-            changedList[idx].mostPrice = row.mostPrice;
-            console.log("(알림)", row.name.desc + " 종목의 " + row.mostPrice.desc + "이(가) 업데이트 되었습니다.");
+
+
+        //console.log('row',row);
+        //console.log('row',idx);
+        if (changedList[idx].price != row.price) {         
+
+            changedList[idx].price = row.price;
+            console.log("(알림)", row.name.desc + " 종목의 " + row.price.desc + "이(가) 업데이트 되었습니다.");
             isChanged = true;
         }
 
@@ -127,7 +132,12 @@ const localUpdate = async (directory, fileName, webDataList) => {
 
     });
 
-   // makeJsonToFile(directory, fileName, changedList);
+    if(isChanged){
+        console.log('데이터가 변경되었음을알립니다.');
+        console.log('수정 저장합니다.');
+    }
+   
+   makeJsonToFile(directory, fileName, changedList);
 
 }
 
