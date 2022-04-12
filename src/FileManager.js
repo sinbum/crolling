@@ -13,13 +13,10 @@ const getJsonFromFile =async (directory, fileName) => {
             return console.log('제이슨 파일 가져오기 에러발생', err);
         }
         if (data) {
-            //console.log(data);            
             return JSON.parse(data)            
         }
     });
-
-    console.log(data);
-    return data;
+    return JSON.parse(data);
 
 }
 
@@ -71,17 +68,17 @@ const localUpdate = async (directory, fileName, webDataList) => {
     let localDataList = await getJsonFromFile(directory, fileName);
     
 
-    console.log("webDataList", webDataList);
-    console.log("localDataList", localDataList);
+    // console.log("webDataList", webDataList);
+    // console.log("localDataList", localDataList);
     
     
     //둘다 리스트화 시켜야함.
 
     console.log('webDataList.length',webDataList.length);
     console.log('localDataList.length',localDataList.length);
-
+    
     if (webDataList.length != localDataList.length) {
-        if (webDataList.length - localDataList.length < 0) {
+        if (webDataList.length - localDataList.length > 0) {
             const 차수 = webDataList.length - localDataList.length;
             let idx = webDataList.length - 차수;
 
@@ -90,11 +87,16 @@ const localUpdate = async (directory, fileName, webDataList) => {
                 idx++;
             }
 
-            //console.log("(알림)", "데이터 업데이트", 'ipo정보가 ' + 차수 + "건 차이가 있습니다.");
+            console.log("(알림)", "데이터 업데이트", 'ipo정보가 ' + 차수 + "건 차이가 있습니다.");
             isChanged = true;
             changedList = localDataList;
+
+            console.log('변경된 리스트 길이',changedList.length);
+            console.log('변경된 리스트 내역',changedList);
         }
     }
+
+    return;
 
     //console.log(JSON.parse(webDataList));
 
