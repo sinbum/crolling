@@ -1,18 +1,26 @@
-const fs = require('fs').promises;
+const fs = require('fs');
+const fsPromises = require('fs').promises;
 
 
 
 
 //제이슨 파일 가져오기
-const getJsonFromFile = async (directory, fileName) => {
-    
-    const filePath = await directory + "/" + fileName + ".txt";
-    let data = await fs.readFile(filePath);    
-    
-    await console.log('반환시작');
-    await console.log('getJsonFromFile', JSON.parse(data));
+const getJsonFromFile =async (directory, fileName) => {
+    const filePath =await directory + "/" + fileName + ".json";
 
-    return JSON.parse(data);
+    let data = await fsPromises.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {            
+            return console.log('제이슨 파일 가져오기 에러발생', err);
+        }
+        if (data) {
+            //console.log(data);            
+            return JSON.parse(data)            
+        }
+    });
+
+    console.log(data);
+    return data;
+
 }
 
 // 디렉토리 생성하기
@@ -40,7 +48,7 @@ const makeJsonToFile = (directory, fileName, jsonList) => {
 
 
 
-    filePath = directory + "/" + fileName + ".txt";
+    filePath = directory + "/" + fileName + ".json";
 
     //디렉토리가 없으면 디렉토리 생성
     makeDirectory(directory);
@@ -60,10 +68,17 @@ const localUpdate = async (directory, fileName, webDataList) => {
     isChanged = false;
     changedList = [];
 
-    const localDataList = await getJsonFromFile(directory, fileName);
+    let localDataList = await getJsonFromFile(directory, fileName);
+    
 
-
+    console.log("webDataList", webDataList);
     console.log("localDataList", localDataList);
+    
+    
+    //둘다 리스트화 시켜야함.
+
+    console.log('webDataList.length',webDataList.length);
+    console.log('localDataList.length',localDataList.length);
 
     if (webDataList.length != localDataList.length) {
         if (webDataList.length - localDataList.length < 0) {
@@ -75,13 +90,15 @@ const localUpdate = async (directory, fileName, webDataList) => {
                 idx++;
             }
 
-            console.log("(알림)", "데이터 업데이트", 'ipo정보가 ' + 차수 + "건 차이가 있습니다.");
+            //console.log("(알림)", "데이터 업데이트", 'ipo정보가 ' + 차수 + "건 차이가 있습니다.");
             isChanged = true;
             changedList = localDataList;
         }
     }
 
-    webDataList.forEach(row, idx => {
+    //console.log(JSON.parse(webDataList));
+
+    webDataList.forEach((row,idx) => {
         if (changedList[idx].mostPrice != row.mostPrice) {
             changedList[idx].mostPrice = row.mostPrice;
             console.log("(알림)", row.name.desc + " 종목의 " + row.mostPrice.desc + "이(가) 업데이트 되었습니다.");
@@ -108,7 +125,7 @@ const localUpdate = async (directory, fileName, webDataList) => {
 
     });
 
-    makeJsonToFile(directory, fileName, changedList);
+   // makeJsonToFile(directory, fileName, changedList);
 
 }
 

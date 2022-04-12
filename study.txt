@@ -12,3 +12,15 @@ url링크 : https://velog.io/@ljh305/%EC%8A%A4%ED%81%AC%EB%9E%98%ED%95%91%EA%B3%
 
 크롤링(puppeteer)
 한번이 아닌 지속적으로 정보를 긁어오고싶다면 puppeteer로 크롤링이 가능합니다.
+puppeteer는 사이트자체를 복제하여 브라우저로 띄울수 있으며 내부 로그인등도 가능하게 해줍니다.
+
+----------------------------------------------------------------------------------------------
+
+22/04/12
+File System의 사용과 async & await 처리
+https://velog.io/@93jm/Node.js-File-System%EC%9D%98-%EC%82%AC%EC%9A%A9%EA%B3%BC-async-await-%EC%B2%98%EB%A6%AC
+
+
+
+FileManager.js 파일에서 7번 라인 getJsonFromFile 함수 사용시 로컬에서 가져온 제이슨파일
+

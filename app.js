@@ -8,15 +8,17 @@ const fileName = "4월"
 
 //이쪽에서 순서때문에 막힘.
 parsing()
-    .then((WebDatalist)=>{     
+    .then((WebDatalist)=>{
         //JSON.stringify(WebDatalist);
-        //writeJson(directory,fileName,JSON.stringify(list))    
-        const localDataList = readJson(directory,fileName);
-        return localDataList;
-        //updateJson(directory,fileName,localDataList,JSON.stringify(WebDatalist));
+        //console.log(WebDatalist); // 제이슨 포멧으로 돌려주는가?
+        //writeJson(directory,fileName,WebDatalist)    
+        
+        readJson(directory,fileName);
+            //console.log('lcoalDataList',WebDatalist);        
+            //updateJson(directory,fileName,WebDatalist);
+
+        return 
         
     })
-    .then(localDataList=>{
-        console.log('lcoalDataList',localDataList);        
-    })
-    .catch(e=>{return console.log("에러발생",e)})
+    
+    .catch(e=>{return console.log("app.js 에서 parsing() 중 에러발생",e)})
