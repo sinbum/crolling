@@ -20,7 +20,3 @@ puppeteer는 사이트자체를 복제하여 브라우저로 띄울수 있으며
 File System의 사용과 async & await 처리
 https://velog.io/@93jm/Node.js-File-System%EC%9D%98-%EC%82%AC%EC%9A%A9%EA%B3%BC-async-await-%EC%B2%98%EB%A6%AC
 
-
-
-FileManager.js 파일에서 7번 라인 getJsonFromFile 함수 사용시 로컬에서 가져온 제이슨파일
-
