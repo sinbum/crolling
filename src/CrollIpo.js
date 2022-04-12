@@ -61,7 +61,8 @@ module.exports.parsing = async () =>{
     function getData(elementList) {
         const tempList = [];
         const result = [];
-        
+        let id = 1;
+
         elementList.each((i,elem)=>{            
             
             function makeObj(id,추천,공모일정,종목명,희망공모가,공모가,공모금액,환불일,상장일,경쟁률,주간사) {
@@ -100,7 +101,6 @@ module.exports.parsing = async () =>{
                 return obj
             }
 
-            const id = i;
             
             //추천
             const 추천 = $(elem).css('height','30').find('td:nth-child(1)').text().trim();
@@ -137,7 +137,9 @@ module.exports.parsing = async () =>{
                 return;
             }
 
-            tempList.push(makeObj(i,추천,공모일정,종목명,희망공모가,공모가,공모금액,환불일,상장일,경쟁률,주간사));
+            tempList.push(makeObj(id++,추천,공모일정,종목명,희망공모가,공모가,공모금액,환불일,상장일,경쟁률,주간사));
+
+            
         });
 
         tempList.forEach((row)=>{            
