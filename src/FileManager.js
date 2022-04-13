@@ -87,9 +87,12 @@ const localUpdate = async (directory, fileName, webDataList) => {
             console.log("(알림)", "데이터 업데이트", 'ipo정보가 ' + 차수 + "건 차이가 있습니다.");
             isChanged = true;
             changedList = localDataList;
-
-            //console.log('변경된 리스트 길이',changedList.length);
         }
+    }
+    
+    if(!isChanged){
+        console.log('변경이 감지되지 않았습니다.');
+        return;
     }
     
     //console.log('변경된 리스트 내역',changedList);
@@ -134,7 +137,7 @@ const localUpdate = async (directory, fileName, webDataList) => {
 
     if(isChanged){
         console.log('데이터가 변경되었음을알립니다.');
-        console.log('수정 저장합니다.');
+        console.log('수정 및 저장을 시작합니다.');
     }
    
    makeJsonToFile(directory, fileName, changedList);
