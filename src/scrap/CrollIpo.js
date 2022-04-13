@@ -3,7 +3,7 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 const url = "http://www.ipostock.co.kr/sub03/ipo04.asp";   
 
-const getHTML = async() => {  
+const getHTML = async() => {
     try {
         return await axios.get(url)        
     } catch (err) {

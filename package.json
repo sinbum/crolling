@@ -20,6 +20,11 @@
   "dependencies": {
     "axios": "^0.26.1",
     "cheerio": "^1.0.0-rc.10",
-    "moment": "^2.29.2"
+    "express": "^4.17.3",
+    "moment": "^2.29.2",
+    "nodemon": "^2.0.15",
+    "nunjucks": "^3.2.3",
+    "qs": "^6.10.3",
+    "session": "^0.1.0"
   }
 }
