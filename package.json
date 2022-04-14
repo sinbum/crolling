@@ -1,30 +1,21 @@
 {
   "name": "crolling",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sinbum/crolling.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sinbum/crolling/issues"
-  },
-  "homepage": "https://github.com/sinbum/crolling#readme",
   "dependencies": {
     "axios": "^0.26.1",
-    "cheerio": "^1.0.0-rc.10",
-    "express": "^4.17.3",
-    "moment": "^2.29.2",
-    "nodemon": "^2.0.15",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-session": "^1.17.2",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
     "nunjucks": "^3.2.3",
+    "pug": "2.0.0-beta11",
     "qs": "^6.10.3",
-    "session": "^0.1.0"
+    "request": "^2.88.2"
   }
 }

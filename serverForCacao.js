@@ -1,5 +1,5 @@
-const SecretInfo = require('./secret');
-const secreInfo = new SecretInfo();
+const KakaoLogin = require('./private/KakaoLogin');
+const kakaoLogin = new KakaoLogin();
 
 const express = require('express');
 const app = express();
@@ -8,10 +8,20 @@ const axios = require('axios');
 const qs = require('qs');
 const session = require('express-session');
 
+let token = {};
+
 app.set('view engine', 'html');
 nunjucks.configure('views', {
     express: app,
 })
+
+
+
+
+
+
+
+
 
 //세션을 설정할 때 쿠키가 생성된다.&&req session의 값도 생성해준다. 어느 라우터든 req session값이 존재하게 된다.
 app.use(session({
@@ -21,16 +31,18 @@ app.use(session({
     saveUninitialized: false,
 }))
 
+
+
 const kakao = {
-    clientID: secreInfo.REST_API_KEY,
-    clientSecret: secreInfo.CLIENT_SECRET_KEY,
-    redirectUri: secreInfo.REDIRECT_URI_KEY
+    clientID: kakaoLogin.REST_API_KEY,
+    clientSecret: kakaoLogin.CLIENT_SECRET_KEY,
+    redirectUri: kakaoLogin.REDIRECT_URI_KEY
 }
 
 //profile account_email
 app.get('/auth/kakao', (req, res) => {
-    const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakao.clientID}&redirect_uri=${kakao.redirectUri}&response_type=code&scope=profile_nickname,account_email,profile_image`;
-    // const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakao.clientID}&redirect_uri=${kakao.redirectUri}&response_type=code&scope=profile,account_email`;
+    const scope = 'scope=profile_nickname,account_email,profile_image,talk_message';
+    const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakao.clientID}&redirect_uri=${kakao.redirectUri}&response_type=code&`+scope;
     res.redirect(kakaoAuthURL);
 })
 
@@ -58,7 +70,7 @@ app.get('/auth/kakao/callback', async (req, res) => {
     //access토큰을 받아서 사용자 정보를 알기 위해 쓰는 코드
     let user;
     try {
-        console.log(token);//access정보를 가지고 또 요청해야 정보를 가져올 수 있음.
+        console.log('토큰정보', token);//access정보를 가지고 또 요청해야 정보를 가져올 수 있음.
         user = await axios({
             method: 'get',
             url: 'https://kapi.kakao.com/v2/user/me',
@@ -80,31 +92,58 @@ app.get('/auth/kakao/callback', async (req, res) => {
 app.get('/auth/info', (req, res) => {
     let { nickname, profile_image } = req.session.kakao.properties;
 
-    console.log(req.session.kakao.properties);
-    
+    //console.log(req.session.kakao.properties);
+
     res.render('info', {
         nickname, profile_image,
     })
 });
 
 app.get('/', (req, res) => {
-    console.log('렌더시작');
-    res.render('main');    
+    //console.log('렌더시작');
+    res.render('main');
 });
 
 
 app.get(kakao.redirectUri);
 
-app.listen(3000, ()=>{
+
+
+
+
+
+
+
+
+//22/04/14 카카오 api 사용 메세지 보내기
+
+const kakaoApi = require('./src/kakaoApi/SendMessege');
+
+app.get('/kakao/sendMessege', (req, res) => {
+
+    if(token){
+        kakaoApi(token.data.access_token);
+    }
+
+    if(!token){
+        console.log('토큰이 없습니다.');
+    }
+    
+    
+
+});
+
+
+
+app.listen(3000, () => {
     console.log(`server start 3000`);
 })
 
-app.listen(8080, ()=>{
+app.listen(8080, () => {
     console.log(`server start 8080`);
 })
 
-app.listen(433, ()=>{
+app.listen(433, () => {
     console.log(`server start 433`);
 })
 
-//app.use(express.static(__dirname+'/src/web/public'));
