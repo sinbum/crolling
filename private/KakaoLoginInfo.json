@@ -1,0 +1,6 @@
+{
+  "REST_API_KEY": "54c79fae743605a84b3a9725d0a91ffa",
+  "CLIENT_SECRET_KEY": "Y5a0VrUB33wy7qw7U9P8E4XfcXPY5Ssi",
+  "REDIRECT_URI_KEY": "http://localhost:3000/auth/kakao/callback",
+  "JAVASCRIPT_KEY": "53fa10100dc19b2b6685987d3e8b2497"
+}
