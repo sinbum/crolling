@@ -1,8 +1,3 @@
-const KakaoLoginInfo = require('../../private/KakaoLoginInfo.json')
-const qs = require('qs')
-loginInfo = qs.parse(KakaoLoginInfo)
-
-
 class KakaoLogin {
 
     constructor(loginInfo) {
@@ -31,7 +26,7 @@ class KakaoLogin {
     }
 
     getLoginInfo() {
-        console.log('이객체 반환', this)
+        //console.log('이객체 반환', this)
         return this
     }
 
@@ -40,3 +35,4 @@ class KakaoLogin {
 
 
 module.exports = KakaoLogin
+
