@@ -1,4 +1,4 @@
-const KakaoLogin = require('./private/KakaoLogin');
+const KakaoLogin = require('./private/KakaoLoginInfo.json');
 const kakaoLogin = new KakaoLogin();
 
 const express = require('express');
@@ -10,17 +10,17 @@ const session = require('express-session');
 
 let token = {};
 
+//카카오객체로그인정보
+const kakao = {
+    clientID: kakaoLogin.REST_API_KEY,
+    clientSecret: kakaoLogin.CLIENT_SECRET_KEY,
+    redirectUri: kakaoLogin.REDIRECT_URI_KEY
+}
+
 app.set('view engine', 'html');
 nunjucks.configure('views', {
     express: app,
 })
-
-
-
-
-
-
-
 
 
 //세션을 설정할 때 쿠키가 생성된다.&&req session의 값도 생성해준다. 어느 라우터든 req session값이 존재하게 된다.
@@ -32,17 +32,10 @@ app.use(session({
 }))
 
 
-
-const kakao = {
-    clientID: kakaoLogin.REST_API_KEY,
-    clientSecret: kakaoLogin.CLIENT_SECRET_KEY,
-    redirectUri: kakaoLogin.REDIRECT_URI_KEY
-}
-
 //profile account_email
 app.get('/auth/kakao', (req, res) => {
     const scope = 'scope=profile_nickname,account_email,profile_image,talk_message';
-    const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakao.clientID}&redirect_uri=${kakao.redirectUri}&response_type=code&`+scope;
+    const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakao.clientID}&redirect_uri=${kakao.redirectUri}&response_type=code&` + scope;
     res.redirect(kakaoAuthURL);
 })
 
@@ -90,7 +83,7 @@ app.get('/auth/kakao/callback', async (req, res) => {
 
 
 app.get('/auth/info', (req, res) => {
-    let { nickname, profile_image } = req.session.kakao.properties;
+    let {nickname, profile_image} = req.session.kakao.properties;
 
     //console.log(req.session.kakao.properties);
 
@@ -108,31 +101,22 @@ app.get('/', (req, res) => {
 app.get(kakao.redirectUri);
 
 
-
-
-
-
-
-
-
 //22/04/14 카카오 api 사용 메세지 보내기
 
 const kakaoApi = require('./src/kakaoApi/SendMessege');
 
 app.get('/kakao/sendMessege', (req, res) => {
 
-    if(token){
+
+    if (token) {
         kakaoApi(token.data.access_token);
     }
 
-    if(!token){
+    if (!token) {
         console.log('토큰이 없습니다.');
     }
-    
-    
 
 });
-
 
 
 app.listen(3000, () => {
