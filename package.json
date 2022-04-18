@@ -6,7 +6,9 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "aligo-kakao-api": "^1.0.9",
     "axios": "^0.26.1",
+    "chromedriver": "^100.0.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
@@ -14,8 +16,12 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "nunjucks": "^3.2.3",
+    "passport": "^0.5.2",
+    "passport-kakao": "^1.0.1",
     "pug": "2.0.0-beta11",
     "qs": "^6.10.3",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "selenium-webdriver": "^4.1.1",
+    "user": "^0.0.0"
   }
 }

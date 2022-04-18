@@ -18,6 +18,7 @@ const kakaoApiMessege = require('./src/kakaoApi/SendMessege');
 
 let token = {};
 
+
 app.set('view engine', 'html');
 nunjucks.configure('views', {
     express: app,
@@ -31,15 +32,21 @@ app.use(session({
     saveUninitialized: false,
 }))
 
+
 app.get('/auth/kakao', (req, res) => {
 
-    //res.send('success');
     console.log(authUrl)
-    res.redirect(authUrl); //authurl
+    //res.redirect(authUrl); //authurl
+    //res.send(authUrl);
+
+    res.send('<h1>hello  world</h1>')
+
+
 })
 
 
 app.get('/auth/kakao/callback', async (req, res) => {
+    console.log('바로 로그인됨');
 
     let requestInfo = kakaoLogin.getReqestInfo(loginInfo);
     requestInfo.data.code = req.query.code;
@@ -104,10 +111,6 @@ app.get('/kakao/sendMessege', async (req, res) => {
         res.json({message: "ok!"})
         // res.status(200).end();
     }
-    // if (status != 200) {
-    //     res.status(404).end();
-    // }
-
 
 });
 
@@ -123,6 +126,5 @@ app.listen(8080, () => {
 app.listen(433, () => {
     console.log(`server start 433`);
 })
-
 
 
