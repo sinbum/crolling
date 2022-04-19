@@ -113,3 +113,25 @@ selenium을 활용하면 웹페이지 정보 수집도 가능하고 원하는 �
 selenium은 다양한 브라우저(Chrome, Internet, Edge, Firefox, Opera, Safari)를 지원합니다.
 
 [참고링크](https://dreamjy.tistory.com/96)
+
+------------------------------------------------
+
+22/04/19
+
+### npm install 과 npm install --save 의 차이점.
+
+'--save' 옵션이 없는 경우에는 현재 node_modules 에 설치만 하지만
+'--save' 옵션을 붙인 경우에는 package.json 의 dependecies에 추가되게 된다.
+
+[참고링크](https://wotres.tistory.com/entry/npm-install-%EA%B3%BC-npm-install-save-%EC%B0%A8%EC%9D%B4)
+
+### npm 설치 항목 목록보기.
+
+npm ls -g
+npm list -g
+
+[참고링크](https://backback.tistory.com/357)
+
+
+
+
