@@ -87,4 +87,51 @@ restApi가 이루어지는방식에서 서버자신이 클라이언트가 되도
 다시 객체지향방식의 필요성을 느끼고 es6에서 코딩가능한 클래스화를 카카오로그인방식을 클래스화 시킴.
 [참고링크](https://webclub.tistory.com/136)
 
+
+------------------------------------------------
+22/04/17
+
+### node.js 의 HTTP 요청 관련 라이브러리들
+
+(request vs axios vs superagent)  
+[참고링크](https://bluayer.com/34)
+
+### passport 라이브러리.
+
 카카오톡 친구목록불러서 친구에게 보내기.
+Node.js에서 Authenticate를 적용할 때에, 편하게 사용할 수 있는 미들웨어입니다.
+여권은 입/출국 심사시에 해당 여권 소지자가 입/출국 자격에 대해 인증하는 역할을 합니다.
+이를 서버에 비교해보면, 클라이언트가 서버에 요청할 자격이 있는지 인증할 때에 passport 미들웨어를 사용합니다.
+
+------------------------------------------------
+
+22/04/18
+
+### selenium-webdriver
+
+selenium을 활용하면 웹페이지 정보 수집도 가능하고 원하는 웹 자동화 프로그램을 작성할 수 있습니다.
+selenium은 다양한 브라우저(Chrome, Internet, Edge, Firefox, Opera, Safari)를 지원합니다.
+
+[참고링크](https://dreamjy.tistory.com/96)
+
+------------------------------------------------
+
+22/04/19
+
+### npm install 과 npm install --save 의 차이점.
+
+'--save' 옵션이 없는 경우에는 현재 node_modules 에 설치만 하지만
+'--save' 옵션을 붙인 경우에는 package.json 의 dependecies에 추가되게 된다.
+
+[참고링크](https://wotres.tistory.com/entry/npm-install-%EA%B3%BC-npm-install-save-%EC%B0%A8%EC%9D%B4)
+
+### npm 설치 항목 목록보기.
+
+npm ls -g
+npm list -g
+
+[참고링크](https://backback.tistory.com/357)
+
+
+
+

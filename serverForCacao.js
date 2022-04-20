@@ -36,7 +36,7 @@ app.use(session({
 app.get('/auth/kakao', (req, res) => {
     const scope = 'scope=profile_nickname,account_email,profile_image,talk_message';
     const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakao.clientID}&redirect_uri=${kakao.redirectUri}&response_type=code&` + scope;
-    res.redirect(kakaoAuthURL);
+    res.redirect(kakaoAuthURL); //authurl
 })
 
 app.get('/auth/kakao/callback', async (req, res) => {
@@ -78,7 +78,7 @@ app.get('/auth/kakao/callback', async (req, res) => {
 
     req.session.kakao = user.data;
     //res.send('success');
-    res.redirect('lcoalhost:3000')
+    res.redirect('lcoalhost:8080')
 });
 
 
